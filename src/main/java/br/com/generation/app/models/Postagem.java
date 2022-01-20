@@ -34,7 +34,7 @@ public class Postagem {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataPostagem = new java.sql.Date(System.currentTimeMillis());
 	
-	@Deprecated
+	
 	public Postagem() {
 		super();
 	}
