@@ -12,11 +12,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-
 @Entity
 @Table(name = "tb_postagens")
-@EntityScan(basePackages = {"br.com.generation.app.model"})
 public class Postagem {
 	
 	@Id

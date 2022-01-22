@@ -13,14 +13,14 @@ import br.com.generation.app.models.Postagem;
 import br.com.generation.app.repositories.PostagemRepository;
 
 @RestController
-@RequestMapping("/postagens")
+@RequestMapping("/postagem")
 @CrossOrigin("*")
 public class PostagemController {
 
 	@Autowired
 	private PostagemRepository postagemRepository;
 	
-	@GetMapping
+	@GetMapping("/postagens")
 	public ResponseEntity<List<Postagem>> buscarTodasPostagens(){
 		List<Postagem> list = postagemRepository.findAll();
 		
