@@ -42,4 +42,16 @@ public class PostagemController {
 					throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id não encontrado");
 				});
 	}
+	
+	@GetMapping("/titulo/{tituloPostagem}")
+	public ResponseEntity<List<Postagem>> buscarPostagemPorTitulo(@PathVariable String tituloPostagem) {
+		//return ResponseEntity.ok(postagemRepository.findAllByTitleContainingIgnoreCase(tituloPostagem));
+		
+		List<Postagem> list = postagemRepository.findAllBytituloPostagemContainingIgnoreCase(tituloPostagem);		
+		if (list.isEmpty()) {
+			return ResponseEntity.status(204).build();
+		} else {
+			return ResponseEntity.status(200).body(list);
+		}
+	}
 }
