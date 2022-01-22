@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,5 +61,14 @@ public class PostagemController {
 	@PostMapping("/salvar")
 	public ResponseEntity<Postagem> salvarPostagem(@RequestBody Postagem postagem) {
 		return ResponseEntity.status(201).body(postagemRepository.save(postagem));
+	}
+	
+	@PutMapping("/atualizar")
+	public ResponseEntity<Postagem> atualizarPostagem(@RequestBody Postagem postagem) {
+		return postagemRepository.findById(postagem.getIdPostagem())
+				.map(resp -> ResponseEntity.status(200).body(postagemRepository.save(postagem)))
+				.orElseGet(() -> {
+					throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id não encontrado");
+				});
 	}
 }
