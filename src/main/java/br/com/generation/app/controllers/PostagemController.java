@@ -28,7 +28,7 @@ public class PostagemController {
 	@Autowired
 	private PostagemRepository postagemRepository;
 	
-	@GetMapping("/buscar/todas")
+	@GetMapping("/buscar/tudo")
 	public ResponseEntity<List<Postagem>> buscarTodasPostagens(){
 		List<Postagem> list = postagemRepository.findAll();
 		
@@ -39,8 +39,8 @@ public class PostagemController {
 		}
 	}
 	
-	@GetMapping("/buscar/{id}")
-	public ResponseEntity<Postagem> buscarPostagemPorId(@PathVariable(value = "id") Long idPostagem) {
+	@GetMapping("/buscar/{idPostagem}")
+	public ResponseEntity<Postagem> buscarPostagemPorId(@PathVariable(value = "idPostagem") Long idPostagem) {
 		return postagemRepository.findById(idPostagem)
 				.map(resp -> ResponseEntity.status(200).body(resp))
 				.orElseGet(() -> {
@@ -49,7 +49,7 @@ public class PostagemController {
 	}
 	
 	@GetMapping("/buscar/titulo/{tituloPostagem}")
-	public ResponseEntity<List<Postagem>> buscarPostagemPorTitulo(@PathVariable String tituloPostagem) {
+	public ResponseEntity<List<Postagem>> buscarPostagemPorTitulo(@PathVariable(value = "tituloPostagem") String tituloPostagem) {
 		//return ResponseEntity.ok(postagemRepository.findAllByTitleContainingIgnoreCase(tituloPostagem));
 		
 		List<Postagem> list = postagemRepository.findAllBytituloPostagemContainingIgnoreCase(tituloPostagem);		
@@ -74,8 +74,8 @@ public class PostagemController {
 				});
 	}
 	
-	@DeleteMapping("/deletar/{id}")
-	public ResponseEntity<Postagem> deletarPostagem(@PathVariable(value = "id") Long idPostagem) {
+	@DeleteMapping("/deletar/{idPostagem}")
+	public ResponseEntity<Postagem> deletarPostagem(@PathVariable(value = "idPostagem") Long idPostagem) {
 		Optional<Postagem> optional = postagemRepository.findById(idPostagem);
 		
 		if (optional.isPresent()) {
