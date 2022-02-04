@@ -14,49 +14,49 @@ public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idUsuario;
+	private long id;
 	
 	@NotBlank
-	@Size(min = 2, max = 100)
-	private String nomeUsuario;
+	@Size(min = 2 , max = 100)
+	private String nome;
 	
 	@NotBlank
-	@Size(min = 5, max = 100)
-	private String loginUsuario;
-	
+	@Size(min = 2 , max = 100)
+	private String usuario;
+
 	@NotBlank
-	@Size(min = 5, max = 100)
-	private String senhaUsuario;
+	@Size(min = 2 , max = 100)
+	private String senha;
 
-	public long getIdUsuario() {
-		return idUsuario;
+	public long getId() {
+		return id;
 	}
 
-	public void setIdUsuario(long idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setId(long id) {
+		this.id = id;
 	}
 
-	public String getNomeUsuario() {
-		return nomeUsuario;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getLoginUsuario() {
-		return loginUsuario;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setLoginUsuario(String loginUsuario) {
-		this.loginUsuario = loginUsuario;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
-	public String getSenhaUsuario() {
-		return senhaUsuario;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setSenhaUsuario(String senhaUsuario) {
-		this.senhaUsuario = senhaUsuario;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 }
