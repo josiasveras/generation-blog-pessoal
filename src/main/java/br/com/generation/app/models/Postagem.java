@@ -24,12 +24,12 @@ public class Postagem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idPostagem;
 	
-	@NotBlank
-	@Size(min = 5, max = 100)
+	@NotBlank(message = "Este campo é de preenchimento obrigatório")
+	@Size(min = 5, max = 100, message = "Campo título deve ter entre 5 e 100 caracteres")
 	private String tituloPostagem;
 	
-	@NotBlank
-	@Size(min = 10, max = 1000)
+	@NotBlank(message = "Este campo é de preenchimento obrigatório")
+	@Size(min = 10, max = 1000, message = "Campo texto deve ter entre 10 e 1000 caracteres")
 	private String textoPostagem;
 	
 	@Temporal(TemporalType.TIMESTAMP)
