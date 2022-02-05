@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -22,16 +23,17 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotBlank
-	@Size(min = 2 , max = 100)
+	@NotBlank(message = "Este campo é de preenchimento obrigatório")
+	@Size(min = 2 , max = 100, message = "Campo nome deve ter entre 2 e 100 caracteres")
 	private String nome;
 	
-	@NotBlank
-	@Size(min = 2 , max = 100)
+	@NotBlank(message = "Este campo é de preenchimento obrigatório")
+	@Size(min = 2 , max = 100, message = "Campo usuário deve ter entre 2 e 100 caracteres")
+	@Email(message = "Insira um email válido. Ex: email@email.com.br")
 	private String usuario;
 
-	@NotBlank
-	@Size(min = 2 , max = 100)
+	@NotBlank(message = "Este campo é de preenchimento obrigatório")
+	@Size(min = 5, message = "Campo senha deve ter no mínimo 5 caracteres")
 	private String senha;
 	
 	private String foto;
