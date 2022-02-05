@@ -15,7 +15,6 @@
 	<description>Projeto Blog Pessoal Bootcamp Generation Brasil</description>
 	<properties>
 		<java.version>11</java.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 		
@@ -77,15 +76,6 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		
-		<!-- Apache Maven Environment -->
-		<!-- https://maven.apache.org/plugins/maven-dependency-plugin/dependency-info.html -->
-		<dependency>
-  			<groupId>org.apache.maven.plugins</groupId>
-  			<artifactId>maven-dependency-plugin</artifactId>
-  			<version>3.2.0</version>
-  			<type>maven-plugin</type>
-		</dependency>
-		
 		<!-- Test Environment -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -113,42 +103,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
-			<!-- Soluçao erro Failed to execute goal org.apache.maven.plugins:maven-resources-plugin:3.2.0:resources -->
-			
-		<plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-                <release>11</release>
-                <compilerArgs>--enable-preview</compilerArgs>
-            </configuration>
-        </plugin>
-        
-        <!-- This is just to make sure the class is set as main class to execute from the jar-->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-shade-plugin</artifactId>
-            <executions>
-                <execution>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>shade</goal>
-                    </goals>
-                    <configuration>
-                        <transformers>
-                            <transformer
-                                    implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-                            <transformer
-                                    implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                <mainClass>com.stackoverflow.nullpointer.expression.SwitchExpressions</mainClass>
-                            </transformer>
-                        </transformers>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>	
-         <!-- https://cursos.alura.com.br/forum/topico-maven-erro-para-deploy-no-heroku-90726 -->
 		</plugins>
 	</build>
 
