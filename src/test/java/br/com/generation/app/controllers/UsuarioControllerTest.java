@@ -2,6 +2,8 @@ package br.com.generation.app.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -53,7 +55,7 @@ public class UsuarioControllerTest {
 	@DisplayName("Não deve permitir duplicação do Usuário")
 	public void naoDeveDuplicarUsuario() {
 
-		usuarioService.CadastrarUsuario(new Usuario(0L, "Wanessa Camargo", "wanessa@email.com.br", "12345", "https://i.imgur.com/T12NIp9.jpg"));
+		usuarioService.cadastrarUsuario(new Usuario(0L, "Wanessa Camargo", "wanessa@email.com.br", "12345", "https://i.imgur.com/T12NIp9.jpg"));
 
 		HttpEntity<Usuario> corpoRequisicao = new HttpEntity<Usuario>(new Usuario(0L, "Wanessa Camargo", "wanessa@email.com.br", "12345", "https://i.imgur.com/T12NIp9.jpg"));
 
@@ -68,9 +70,9 @@ public class UsuarioControllerTest {
 	@DisplayName("Atualizar um Usuário")
 	public void deveAtualizarUmUsuario() {
 
-		Usuario usuarioCadastrado = usuarioService.CadastrarUsuario(new Usuario(0L, "Michael", "michael@email.com.br", "54321", "https://i.imgur.com/FETvs2O.jpg"));
+		Optional<Usuario> usuarioCadastrado = usuarioService.cadastrarUsuario(new Usuario(0L, "Michael", "michael@email.com.br", "54321", "https://i.imgur.com/FETvs2O.jpg"));
 		
-		Usuario usuarioUpdate = new Usuario(usuarioCadastrado.getId(), "Michael Jackson", "michael@email.com.br", "54321" , "https://i.imgur.com/FETvs2O.jpg");
+		Usuario usuarioUpdate = new Usuario(usuarioCadastrado.get().getId(), "Michael Jackson", "michael@email.com.br", "54321" , "https://i.imgur.com/FETvs2O.jpg");
 		
 		HttpEntity<Usuario> corpoRequisicao = new HttpEntity<Usuario>(usuarioUpdate);
 
@@ -88,9 +90,9 @@ public class UsuarioControllerTest {
 	@DisplayName("Listar todos os Usuários")
 	public void deveMostrarTodosUsuarios() {
 
-		usuarioService.CadastrarUsuario(new Usuario(0L, "Susana Vieira", "susana@email.com.br", "54321", "https://i.imgur.com/5M2p5Wb.jpg"));
+		usuarioService.cadastrarUsuario(new Usuario(0L, "Susana Vieira", "susana@email.com.br", "54321", "https://i.imgur.com/5M2p5Wb.jpg"));
 		
-		usuarioService.CadastrarUsuario(new Usuario(0L, "Jay-Z", "jay@email.com.br", "54321", "https://i.imgur.com/Sk5SjWE.jpg"));
+		usuarioService.cadastrarUsuario(new Usuario(0L, "Jay-Z", "jay@email.com.br", "54321", "https://i.imgur.com/Sk5SjWE.jpg"));
 
 		ResponseEntity<String> resposta = testRestTemplate
 			.withBasicAuth("root", "root")
@@ -104,11 +106,11 @@ public class UsuarioControllerTest {
 	@DisplayName("Listar Um Usuário Específico")
 	public void deveListarApenasUmUsuario() {
 		
-		Usuario usuarioBusca = usuarioService.CadastrarUsuario(new Usuario(0L, "Beyoncé Giselle Knowles-Carter ", "beyonce@email.com.br", "54321", "https://i.imgur.com/EcJG8kB.jpg"));
+		Optional<Usuario> usuarioBusca = usuarioService.cadastrarUsuario(new Usuario(0L, "Beyoncé Giselle Knowles-Carter ", "beyonce@email.com.br", "54321", "https://i.imgur.com/EcJG8kB.jpg"));
 			
 		ResponseEntity<String> resposta = testRestTemplate
 				.withBasicAuth("root", "root")
-				.exchange("/usuario/buscar/" + usuarioBusca.getId(), HttpMethod.GET, null, String.class);
+				.exchange("/usuario/buscar/" + usuarioBusca.get().getId(), HttpMethod.GET, null, String.class);
 		
 		assertEquals(HttpStatus.OK, resposta.getStatusCode());
 		
