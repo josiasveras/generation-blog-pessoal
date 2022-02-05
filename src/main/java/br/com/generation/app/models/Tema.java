@@ -22,8 +22,8 @@ public class Tema {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idTema;
 	
-	@NotBlank
-	@Size(min = 2, max = 100)
+	@NotBlank(message = "Este campo é de preenchimento obrigatório")
+	@Size(min = 2, max = 100, message = "Campo descrição deve ter entre 2 e 100 caracteres")
 	private String descricaoTema;
 	
 	@OneToMany(mappedBy = "tema", cascade = CascadeType.REMOVE)
