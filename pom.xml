@@ -77,6 +77,14 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		
+		<!-- Apache Maven Environment -->
+		<dependency>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-dependency-plugin</artifactId>
+  			<version>3.2.0</version>
+  			<type>maven-plugin</type>
+		</dependency>
+		
 		<!-- Test Environment -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
