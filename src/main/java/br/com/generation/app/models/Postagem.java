@@ -40,8 +40,22 @@ public class Postagem {
 	@JsonIgnoreProperties("postagem")
 	private Tema tema;
 	
+	@ManyToOne
+	@JoinColumn(name="fk_usuario")
+	@JsonIgnoreProperties("postagem")
+	private Usuario usuario;
+	
+	public Postagem(long idPostagem, String tituloPostagem, String textoPostagem, Date dataPostagem, Tema tema, Usuario usuario) {
+		this.idPostagem = idPostagem;
+		this.tituloPostagem = tituloPostagem;
+		this.textoPostagem = textoPostagem;
+		this.dataPostagem = dataPostagem;
+		this.tema = tema;
+		this.usuario = usuario;
+	}
+
 	public Postagem() {
-		super();
+
 	}
 
 	public long getIdPostagem() {
@@ -82,5 +96,13 @@ public class Postagem {
 
 	public void setTema(Tema tema) {
 		this.tema = tema;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 }
