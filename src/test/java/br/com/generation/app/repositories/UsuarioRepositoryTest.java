@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -59,5 +60,10 @@ public class UsuarioRepositoryTest {
 
 		assertTrue(listaDeUsuarios.get(2).getNome().equals("Alfredo Volpi"));
 		
+	}
+	
+	@AfterAll
+	public void end() {
+		usuarioRepository.deleteAll();
 	}
 }
