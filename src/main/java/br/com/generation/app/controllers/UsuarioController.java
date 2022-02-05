@@ -3,6 +3,8 @@ package br.com.generation.app.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +17,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
-
 import br.com.generation.app.models.UserLogin;
 import br.com.generation.app.models.Usuario;
 import br.com.generation.app.repositories.UsuarioRepository;
@@ -34,18 +34,18 @@ public class UsuarioController {
 	private UsuarioRepository usuarioRepository;
 
 	@PostMapping("/logar")
-	public ResponseEntity<UserLogin>  Autentication(@RequestBody Optional<UserLogin> user) {
+	public ResponseEntity<UserLogin> autentication(@RequestBody Optional<UserLogin> user) {
 		
-		return usuarioService.Logar(user).map(resp -> ResponseEntity.ok(resp))
+		return usuarioService.logar(user).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 	}
 	
 	@PostMapping("/cadastrar")
-	public ResponseEntity<Usuario> Post(@RequestBody Usuario usuario) {
+	public ResponseEntity<Usuario> postUsuario(@Valid @RequestBody Usuario usuario){
 		
-		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(usuarioService.CadastrarUsuario(usuario));
-	
+		return usuarioService.cadastrarUsuario(usuario)
+			.map(resp -> ResponseEntity.status(HttpStatus.CREATED).body(resp))
+			.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
 	}
 	
 	@GetMapping("/buscar/tudo")
@@ -65,12 +65,12 @@ public class UsuarioController {
 	}
 	
 	@PutMapping("/atualizar")
-	public ResponseEntity<Usuario> put (@RequestBody Usuario usuario){
+	public ResponseEntity<Usuario> putUsuario (@RequestBody Usuario usuario){
 		return ResponseEntity.status(HttpStatus.OK).body(usuarioRepository.save(usuario));
 	}
 	
 	@DeleteMapping("/apagar/{id}")
-	public void delete(@PathVariable Long id) {
+	public void deleteUsuario(@PathVariable Long id) {
 		usuarioRepository.deleteById(id);
 	}
 }
