@@ -28,7 +28,6 @@ public class UsuarioService {
 
 			return Optional.of(usuarioRepository.save(usuario));
 		}
-
 	}
 
 	public Optional<UserLogin> logar(Optional<UserLogin> user){
@@ -40,11 +39,16 @@ public class UsuarioService {
 				String auth =  user.get().getUsuario() + ":" + user.get().getSenha();
 				byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
 				String authHeader = "Basic " + new String(encodedAuth);
-				user.get().setToken(authHeader);
+				
+				user.get().setId(usuario.get().getId());
 				user.get().setNome(usuario.get().getNome());
+				user.get().setSenha(usuario.get().getSenha());
+				user.get().setToken(authHeader);
+				user.get().setFoto(usuario.get().getFoto());
+				user.get().setTipo(usuario.get().getTipo());
+				
 				return user;
 			}
-
 		}
 
 		return null;
